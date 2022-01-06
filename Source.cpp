@@ -7,14 +7,15 @@
 
 #include <iostream>
 #include <string>
-
-//* 2.40 *//
+#include "./sales_data.h"
+// 2.40
+/*
 struct sales_data {
 	std::string isbn;
 	unsigned booksSold = 0;
 	double revenue = 0.0;
-};
-
+};*/
+/*
 int main() {
 
 	// 2.41 rewrite the previous exercises using the new sales data struct
@@ -28,8 +29,10 @@ int main() {
 	Exercise 1.22: Write a program that reads several transactions for the same
 	ISBN. Write the sum of all the transactions that were read.
 	*/
+	/*
 	sales_data SalesData, TotalData;
 	std::string tmp_isbn;
+	/*
 	while (std::cin >> SalesData.isbn >> SalesData.booksSold >> SalesData.revenue) {
 		if (tmp_isbn == "") {
 			TotalData.booksSold += SalesData.booksSold;
@@ -49,7 +52,7 @@ int main() {
 		tmp_isbn = SalesData.isbn;
 	}
 	std::cout << TotalData.booksSold << " " << TotalData.revenue << std::endl;
-
+	*/
 
 	/*
 	Exercise 1.23: Write a program that reads several transactions and counts
@@ -58,6 +61,7 @@ int main() {
 	representing multiple ISBNs. The records for each ISBN should be grouped
 	together.
 	*/
+	/*
 	unsigned cnt = 0;
 	while (std::cin >> SalesData.isbn >> SalesData.booksSold >> SalesData.revenue) {
 		if (tmp_isbn == "") {
@@ -66,8 +70,8 @@ int main() {
 		else {
 			if (tmp_isbn != SalesData.isbn) {
 				std::cout << tmp_isbn << " occurred " << cnt << " times!" << std::endl;
-				cnt = 0;
-			}
+				cnt = 1;
+			} 
 			else {
 				cnt++;
 			}
@@ -76,9 +80,10 @@ int main() {
 		tmp_isbn = SalesData.isbn;
 	}
 	std::cout << TotalData.booksSold << " " << TotalData.revenue << std::endl;
+	
 	return 0;
 }
-
+*/
 int main()
 {
 	sales_data total; // variable to hold data for the next transaction
@@ -88,16 +93,18 @@ int main()
 		// read and process the remaining transactions
 		while (std::cin >> trans.isbn >> trans.booksSold >> trans.revenue) {
 			// if we're still processing the same book
-			if (total.isbn == trans.isbn)
+			if (total.isbn == trans.isbn) {
 				total.revenue += trans.revenue; // update the running total
+				total.booksSold += trans.booksSold;
+			} 
 			else {
 				// print results for the previous book
-				std::cout << total.revenue << std::endl;
+				std::cout << total.isbn << " " << total.revenue << std::endl;
 				total.isbn = trans.isbn; // total now refers to the next book
 
 			}
 		}
-		std::cout << total.isbn << total.booksSold << total.revenue << std::endl; // print the last transaction
+		std::cout << trans.isbn << trans.booksSold << trans.revenue << std::endl; // print the last transaction
 	}
 	else {
 		// no input! warn the user
